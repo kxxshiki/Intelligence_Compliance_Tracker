@@ -39,7 +39,7 @@ def get_framework(framework_id: str, db: Session = Depends(get_db)):
         "version": framework.version,
         "description": framework.description,
         "status": framework.status,
-        "metadata": framework.metadata,
+        "metadata": framework.metadata_,
     }
 
 

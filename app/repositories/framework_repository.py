@@ -30,7 +30,10 @@ class FrameworkRepository:
         return mapping
 
     def create(self, payload: dict) -> Framework:
-        framework = Framework(**payload)
+        sanitized = dict(payload)
+        if "metadata" in sanitized and "metadata_" not in sanitized:
+            sanitized["metadata_"] = sanitized.pop("metadata")
+        framework = Framework(**sanitized)
         self.db.add(framework)
         self.db.commit()
         self.db.refresh(framework)

@@ -5,7 +5,19 @@ from app.core.config import settings
 from app.db.base import Base
 
 # Import all models before schema creation so SQLAlchemy registers every table.
-from app.models import audit_log, control, drift, evaluation, evidence, finding, mapping, remediation
+from app.models import (
+    asset,
+    audit_log,
+    control,
+    drift,
+    evaluation,
+    evidence,
+    finding,
+    framework,
+    job,
+    mapping,
+    remediation,
+)
 
 engine = create_engine(settings.database_url, future=True, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)

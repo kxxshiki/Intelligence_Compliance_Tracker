@@ -15,5 +15,5 @@ class Asset(BaseModel):
     owner: Mapped[str | None] = mapped_column(String(255), nullable=True)
     status: Mapped[str] = mapped_column(String(32), nullable=False, default="active", index=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
-    metadata: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    metadata_: Mapped[dict | None] = mapped_column("metadata", JSON, nullable=True)
     archived: Mapped[bool] = mapped_column(default=False, nullable=False)

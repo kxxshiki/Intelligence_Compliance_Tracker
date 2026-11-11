@@ -1,4 +1,20 @@
-.env
+# Python
 __pycache__/
-*.pyc
-.pytest_cache/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# VS Code
+.vscode/

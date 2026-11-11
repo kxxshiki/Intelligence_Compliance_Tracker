@@ -21,7 +21,10 @@ class AssetRepository:
         return query.order_by(Asset.name).all()
 
     def create(self, payload: dict) -> Asset:
-        asset = Asset(**payload)
+        sanitized = dict(payload)
+        if "metadata" in sanitized and "metadata_" not in sanitized:
+            sanitized["metadata_"] = sanitized.pop("metadata")
+        asset = Asset(**sanitized)
         self.db.add(asset)
         self.db.commit()
         self.db.refresh(asset)
@@ -29,7 +32,10 @@ class AssetRepository:
 
     def update(self, asset: Asset, payload: dict) -> Asset:
         for field, value in payload.items():
-            setattr(asset, field, value)
+            if field == "metadata":
+                asset.metadata_ = value
+            else:
+                setattr(asset, field, value)
         self.db.commit()
         self.db.refresh(asset)
         return asset
